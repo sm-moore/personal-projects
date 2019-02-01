@@ -1,0 +1,6 @@
+[package]
+name = "grocery_list"
+version = "0.1.0"
+authors = ["Sara Adamson <saraa@sampleminded.com>"]
+
+[dependencies]
