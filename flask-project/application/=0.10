@@ -1,0 +1,13 @@
+Collecting flask-appconfig
+  Downloading flask-appconfig-0.11.1.tar.gz
+Requirement already satisfied: flask<1.0 in /Users/sadamson/.pyenv/versions/3.6.1/lib/python3.6/site-packages (from flask-appconfig)
+Requirement already satisfied: six in /Users/sadamson/.pyenv/versions/3.6.1/lib/python3.6/site-packages (from flask-appconfig)
+Requirement already satisfied: click in /Users/sadamson/.pyenv/versions/3.6.1/lib/python3.6/site-packages (from flask-appconfig)
+Requirement already satisfied: Jinja2>=2.4 in /Users/sadamson/.pyenv/versions/3.6.1/lib/python3.6/site-packages (from flask<1.0->flask-appconfig)
+Requirement already satisfied: Werkzeug>=0.7 in /Users/sadamson/.pyenv/versions/3.6.1/lib/python3.6/site-packages (from flask<1.0->flask-appconfig)
+Requirement already satisfied: itsdangerous>=0.21 in /Users/sadamson/.pyenv/versions/3.6.1/lib/python3.6/site-packages (from flask<1.0->flask-appconfig)
+Requirement already satisfied: MarkupSafe>=0.23 in /Users/sadamson/.pyenv/versions/3.6.1/lib/python3.6/site-packages (from Jinja2>=2.4->flask<1.0->flask-appconfig)
+Installing collected packages: flask-appconfig
+  Running setup.py install for flask-appconfig: started
+    Running setup.py install for flask-appconfig: finished with status 'done'
+Successfully installed flask-appconfig-0.11.1
