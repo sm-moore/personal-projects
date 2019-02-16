@@ -13,11 +13,13 @@ func exit(err error) {
 	os.Exit(1)
 }
 
+// Returns the minimum number of flips required to turn all pancakes right-side-up.
+// This algorithm is solved by recursively aligning the pancakes and counting the number of flips required to do so.
 func flipThosePancakes(pancakes string) int {
 	// Align all the pancakes so that they are all facing the same direction.
 	pancakesSlice := strings.Split(pancakes, "")
 
-	// Check to be sure they aren't already aligned
+	// Check to be sure they aren't already aligned.
 	if match(pancakesSlice) {
 		if pancakesSlice[0] == "-" {
 			return 1
@@ -26,6 +28,7 @@ func flipThosePancakes(pancakes string) int {
 	}
 
 	alignedPancakes, flips := alignPancakes(pancakesSlice, 0)
+
 	// Are they facing downward? If so, one more flip is required.
 	if alignedPancakes[0] == "-" {
 		flips++
@@ -33,40 +36,44 @@ func flipThosePancakes(pancakes string) int {
 	return flips
 }
 
+// Aligns all pancakes in the stack so that they are all facing one direction. Also tracks the number of flips it takes to do this.
 func alignPancakes(pancakes []string, flipsSoFar int) ([]string, int) {
 	if len(pancakes) == 1 || match(pancakes) {
 		return flipMatchingStack(pancakes), flipsSoFar + 1
 	}
-	// start from the end, move left until symbols dont match
+	// Start from the end, move left until symbols don't match.
 	for i := len(pancakes) - 1; i > 0; i-- {
 		if pancakes[i] != pancakes[i-1] {
-			// align the left half
+			// Align the left half.
 			pancakesLeft, newFlipsSoFar := alignPancakes(pancakes[:i], flipsSoFar)
-			// determine if aligning the left half caused it to match the right half, or if it needs to be flipped first
+			// Determine if left half must be flipped.
 			if pancakesLeft[0] != pancakes[i] {
 				pancakesLeft = flipMatchingStack(pancakesLeft)
 				newFlipsSoFar++
 			}
-			// append the right half
+			// Append the right half.
 			newPancakes := append(pancakesLeft, pancakes[i:len(pancakes)]...)
-			// all pancakes are aligned
+			// All pancakes are aligned.
 			return newPancakes, newFlipsSoFar
 		}
 	}
-	// they are already aligned
+	// Pancakes are already aligned.
 	return pancakes, flipsSoFar
 
 }
 
+// Given a stack of pancakes that are matching, flip them.
+// Note: matching pancake stacks that are flipped don't need to be reversed,
+// this shortcut saves a bit of stack space.
 func flipMatchingStack(pancakes []string) []string {
 	newPancakes := pancakes
-	// flip each pancake
 	for i := 0; i < len(pancakes); i++ {
 		newPancakes[i] = flip(pancakes[i])
 	}
 	return newPancakes
 }
 
+// Flips a single pancake
 func flip(pancake string) string {
 	if pancake == "+" {
 		return "-"
@@ -74,45 +81,43 @@ func flip(pancake string) string {
 	return "+"
 }
 
-// Returns true if all pancakes are facing the same direction
+// Returns true if all pancakes are facing the same direction.
 func match(pancakes []string) bool {
 	if len(pancakes) == 1 {
 		return true
 	}
-
 	for i := len(pancakes) - 1; i > 0; i-- {
 		if pancakes[i] != pancakes[i-1] {
 			return false
 		}
 	}
-
 	return true
 }
 
 func main() {
 	reader := bufio.NewReader(os.Stdin)
-
+	// First line contains the number of test cases.
 	t, err := reader.ReadString('\n')
 	if err != nil {
 		exit(err)
 	}
-
 	testCaseCount, err := strconv.Atoi(strings.TrimSpace(t))
 	if err != nil {
 		exit(err)
 	}
 
+	// Read in the correct number of test cases.
 	results := []int{}
-
 	for i := 0; i < testCaseCount; i++ {
 		testCase, err := reader.ReadString('\n')
 		if err != nil {
 			exit(err)
 		}
-
-		results = append(results, flipThosePancakes(testCase))
+		// Run the algorithm and store it to be printed later.
+		results = append(results, flipThosePancakes(strings.TrimSpace(testCase)))
 	}
 
+	// Print all results.
 	for i, result := range results {
 		fmt.Printf("Case #%v: %v\n", i+1, result)
 	}
