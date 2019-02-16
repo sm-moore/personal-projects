@@ -34,7 +34,6 @@ func flipThosePancakes(pancakes string) int {
 }
 
 func alignPancakes(pancakes []string, flipsSoFar int) ([]string, int) {
-	// printMe(pancakes)
 	if len(pancakes) == 1 || match(pancakes) {
 		return flipMatchingStack(pancakes), flipsSoFar + 1
 	}
@@ -57,26 +56,6 @@ func alignPancakes(pancakes []string, flipsSoFar int) ([]string, int) {
 	// they are already aligned
 	return pancakes, flipsSoFar
 
-}
-
-// Flips all the pancakes in this stack
-// func flipStack(pancakes []string) []string {
-// 	newPancakes := pancakes
-// 	for i := 0; i <= len(pancakes)/2; i++ {
-// 		// flip and swap
-// 		left := flip(pancakes[i])
-// 		right := flip(pancakes[(len(pancakes)-1)-i])
-// 		newPancakes[i] = right
-// 		newPancakes[(len(pancakes)-1)-i] = left
-// 	}
-// 	return newPancakes
-// }
-
-func printMe(str []string) {
-	for _, s := range str {
-		fmt.Printf("%v, ", s)
-	}
-	println()
 }
 
 func flipMatchingStack(pancakes []string) []string {
