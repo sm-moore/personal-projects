@@ -1,0 +1,8 @@
+[package]
+name = "web_sample"
+version = "0.1.0"
+authors = ["Sara Moore <sm.moore915@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+actix-web = "0.7"
